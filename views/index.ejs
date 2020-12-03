@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- Bootstrap CDN (Content Delivery Network)-->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <!-- jQuery CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script>
+	$(document).ready(function(){
+		$("button").click(function(){
+			var area = $("#area_code").val();
+			var unit = $("#unit").val();
+			$.get("http://localhost:3000/convert/"+area+"/"+unit,function(data,status){
+				//alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+				$('#result').html("<br><b>Current Temperature:</b> "+data.temp+" "+data.unit);
+			});
+		});
+	});
+   </script>
+</head>
+  <body>
+    <div class="container-fluid">
+		<h1>Temperature Conversion</h1>
+		<form role="form" method="GET">
+		  <div class="form-group">
+			<label for="area_code">City:</label>
+			<select class="form-control" id="area_code">
+			    <option value="BKK">Bangkok</option>
+			    <option value="LND">London</option>
+			    <option value="NY">New York</option>
+			    <option value="SG">Singapore</option>
+			    <option value="SYD">Sydney</option>
+			</select>
+		  </div>
+		  <div class="form-group">
+			<label for="unit">Temperature Unit:</label>
+			<select class="form-control" id="unit">
+			    <option value="C">Celsius (C)</option>
+			    <option value="F">Fahrenheit (F)</option>
+			    <option value="K">Kelvin (K)</option>
+			    <option value="R">Reaumur (R)</option>
+			</select>
+		  </div>
+		  <button type="button" class="btn btn-primary">Convert</button>
+		</form>
+	</div>
+	<div id="result" style="margin:10px; color:red;"></div>
+  </body>
+</html>

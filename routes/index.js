@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/weather', function(req, res) {
   
-  	console.log("test weather!!!");
+  	console.log("test weather!!!!!");
 	MongoClient.connect(url, function(err, db) {
 	  if (err) throw err;
 	  var dbo = db.db("admin");
